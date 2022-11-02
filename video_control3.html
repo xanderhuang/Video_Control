@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <!-- Google Fonts -->
+    <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto Sans TC"> -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Fredericka the Great">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Passero+One">
+
+    <title>Video Control</title>
+
+    <style>
+        h1 {
+            position: relative;
+            color: white;
+            font-family: "Fredericka the Great", "Lucida Grande", Helvetica, "Helvetica Neue", "HelveticaNeue-Light", "Helvetica Neue Light", Arial, sans-serif;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <!-- BANNER -->
+    <div style="height:100vh; background-color:royalblue;"></div>
+
+
+    <!-- Video01  -->
+    <div style="height:1000vh;">
+        <div class="sticky-top">
+            <video id="video1" src="https://github.com/P4CSS/webScroll/raw/main/mov/forward.mp4" style="width:100vw"></video>
+        </div>
+    </div>
+    <div style="height:100vh;background:grey;"></div>
+
+    <!-- Video 02 -->
+    <div style="height:1000vh">
+        <div class="sticky-top">
+            <video id="video2" src="https://github.com/P4CSS/webScroll/raw/main/mov/backward.mp4" style="width:100vw"></video>
+        </div>
+    </div>
+    <div style="height:100vh;background:grey;"></div>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(function() {
+            let video1 = $("#video1");
+            let video2 = $("#video2");
+            let video1_pos = video1.offset().top;
+            let video2_pos = video2.offset().top;
+            let video1_end = video1.offset().top + video1.parent().parent().height();
+            let video2_end = video2.offset().top + video2.parent().parent().height();
+
+            $(window).scroll(function() {
+                let scrolled = $(window).scrollTop();
+                if (scrolled > video1_pos && scrolled < video1_end && !video1.hasClass("played")) {
+                    video1.get(0).play();
+                    // 設定是否已播放完video1的flag
+                    video1.addClass("played");
+                }
+                if (scrolled == 0 && video1.hasClass("played")) {
+                    video1.removeClass("played");
+                    video1.on("end", function() {
+                        video1.currentTime = 0;
+                    });
+                }
+
+                if (scrolled > video2_pos && scrolled < video2_end && !video2.hasClass("played")) {
+                    video2.get(0).play();
+                    video2.addClass("played");
+                }
+                if (scrolled == 0 && video2.hasClass("played")) {
+                    video2.removeClass("played");
+                    video2.on("end", function() {
+                        video2.currentTime = 0;
+                    });
+
+                }
+
+            });
+        });
+    </script>
+</body>
+
+</html>

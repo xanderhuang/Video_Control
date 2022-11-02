@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <!-- Google Fonts -->
+    <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto Sans TC"> -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Fredericka the Great">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Passero+One">
+
+    <title>Video Control</title>
+
+    <style>
+        #video {
+            position: fixed;
+            min-width: 100%;
+            min-height: 100%;
+            width: 0vw;
+            height: 150vh;
+            z-index: -1;
+            top: -20vh;
+        }
+        
+        h1 {
+            position: relative;
+            top: 50vh;
+            left: 20vw;
+            background-color: white;
+            font-family: "Fredericka the Great", "Lucida Grande", Helvetica, "Helvetica Neue", "HelveticaNeue-Light", "Helvetica Neue Light", Arial, sans-serif;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div class="container-fluid">
+        <video id="video" src="https://web.cw.com.tw/climate-2020/landing/cover-mobile.mp4"></video>
+        <!-- 要播放video，背後要有一個division能夠捲動它 -->
+        <div style="position:absolute; z-index:20; width:100%;">
+            <div style="width:100%; height:1000vh; background-color: rgba(0, 0, 0, 0.5)">
+                <h1>Deforestation</h1>
+            </div>
+            <div style="width:100%; height:500vh; background:rgba(0, 0, 0, 0.3)">
+                <h1>Climate Change</h1>
+            </div>
+            <div style="width:100%; height:500vh; background:rgba(0, 0, 0, 0.2)">
+                <h1>Environmental Protection</h1>
+            </div>
+            <div style="width:100%; height:500vh; background:rgba(0, 0, 0, 0.1)"></div>
+        </div>
+
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script>
+        $(function() {
+            let max_scroll = $(document).height() - $(window).height();
+            $(window).scroll(function(e) {
+                let video = $('#video').get(0),
+                    videoLength = video.duration,
+                    current_pos = $(document).scrollTop();
+                video.currentTime = videoLength * (current_pos / max_scroll);
+            });
+        });
+    </script>
+</body>
+
+</html>

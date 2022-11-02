@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <!-- Google Fonts -->
+    <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto Sans TC"> -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Fredericka the Great">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Passero+One">
+
+    <title>Video Control</title>
+
+    <style>
+        h1 {
+            position: relative;
+            color: white;
+            font-family: "Fredericka the Great", "Lucida Grande", Helvetica, "Helvetica Neue", "HelveticaNeue-Light", "Helvetica Neue Light", Arial, sans-serif;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div style="height:100vh; background-color:royalblue;"></div>
+
+    <div id="v1frame" style="height:1000vh;">
+        <div class="sticky-top" style="z-index:-1">
+            <video id="video1" src="https://web.cw.com.tw/climate-2020/landing/cover.mp4" style="width:100vw;"></video>
+        </div>
+        <!-- 前面放video的division：sticky-top，後面跟的division可作為文字方塊 -->
+        <div class="row" style="height:100vh">
+            <div class="col-6"></div>
+            <div class="col-6" style="height:100vh;background-color:rgba(0,0,0,0.5);">
+                <h1>Deforestation</h1>
+                <h1>Climate Change</h1>
+                <h1>Environmental Protection</h1>
+            </div>
+        </div>
+    </div>
+    <div style="height:100vh;background:grey;"></div>
+
+    <div id="v2frame" style="height:1000vh">
+        <div class="sticky-top">
+            <video id="video2" src="https://web.cw.com.tw/climate-2020/deforestation/cover.mp4" style="width:100vw;"></video>
+        </div>
+    </div>
+    <div style="height:100vh;background:grey;"></div>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(function() {
+            let video1_pos = $("#video1").offset().top;
+            let video2_pos = $("#video2").offset().top;
+            let video1_end = $("#video1").offset().top + $("#v1frame").height();
+            let video2_end = $("#video2").offset().top + $("#v2frame").height();
+            console.log(video1_end);
+            $(window).scroll(function() {
+                let scroll = $(window).scrollTop();
+                console.log(scroll);
+                let winh = $(window).height();
+                if (scroll > video1_pos && scroll < video1_end) {
+                    $("#video1")[0].play();
+                } else {
+                    $("#video1")[0].pause();
+                }
+                if (scroll > video2_pos && scroll < video2_end) {
+                    $("#video2")[0].play();
+                } else {
+                    $("#video2")[0].pause();
+                }
+
+            });
+        });
+    </script>
+</body>
+
+</html>
